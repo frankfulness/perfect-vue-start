@@ -1,0 +1,131 @@
+@import './base.css';
+@import 'tailwindcss';
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Theme variables with standard Vue green and integrated colors from your theme */
+@theme {
+  --color-background: white;
+  --color-foreground: var(--color-slate-950);
+  --color-secondary: var(--color-slate-200);
+  --color-secondary-foreground: var(--color-slate-900);
+  --color-button: var(--color-sky-700);
+  --color-button-foreground: white;
+  --color-muted: var(--color-slate-100);
+  --color-muted-foreground: var(--color-zinc-600);
+  --color-card: var(--color-slate-50);
+  --color-card-foreground: var(--color-slate-950);
+  --color-border: var(--color-slate-200);
+  --color-hover: var(--color-slate-300);
+  --color-hover-foreground: var(--color-slate-800);
+  --color-outline: var(--color-gray-300);
+  --color-disabled: var(--color-gray-700);
+  --color-accent: hsla(160, 100%, 37%, 1); /* Vue green */
+  --color-accent-hover: hsla(160, 100%, 37%, 0.2); /* Vue green hover */
+  --shadow-layered-light:
+    0 0px 0px 4px #bae6fdd9, 0 0px 0px 16px #e0f2febf, 0 0px 0px 24px #eff6ff9e;
+  --shadow-layered-dark: 0 0px 0px 4px #002c66, 0 0px 0px 16px #022d4a, 0 0px 0px 24px #022131;
+}
+
+/* Override for dark mode */
+@layer base {
+  @variant dark {
+    --color-background: var(--color-slate-950);
+    --color-foreground: white;
+    --color-secondary: var(--color-slate-800);
+    --color-secondary-foreground: var(--color-slate-200);
+    --color-button: var(--color-sky-700);
+    --color-button-foreground: white;
+    --color-muted: var(--color-slate-900);
+    --color-muted-foreground: var(--color-zinc-300);
+    --color-card: var(--color-zinc-800);
+    --color-card-foreground: white;
+    --color-border: var(--color-slate-800);
+    --color-hover: var(--color-slate-700);
+    --color-hover-foreground: var(--color-slate-200);
+    --color-outline: var(--color-gray-500);
+    --color-disabled: var(--color-gray-300);
+    --color-accent: hsla(160, 100%, 45%, 1); /* Brighter Vue green for dark mode */
+    --color-accent-hover: hsla(160, 100%, 45%, 0.25); /* Vue green hover for dark mode */
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground transition-colors duration-300;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-medium tracking-tight;
+  }
+}
+
+/* Utility classes */
+@utility text-balance {
+  text-wrap: balance;
+}
+
+/* App layout styles */
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-weight: normal;
+}
+
+/* Link styles */
+a,
+.green {
+  text-decoration: none;
+  color: var(--color-accent);
+  transition: 0.4s;
+  padding: 3px;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: var(--color-accent-hover);
+  }
+}
+
+/* Responsive layout */
+@media (min-width: 1024px) {
+  body {
+    display: flex;
+    place-items: center;
+  }
+
+  #app {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 2rem;
+  }
+}
+
+/* Data Table Styling */
+.table-container {
+  @apply w-full overflow-hidden rounded-lg shadow-md bg-card;
+}
+
+.data-table {
+  @apply w-full border-collapse;
+}
+
+.table-header {
+  @apply px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-foreground bg-secondary;
+}
+
+.table-cell {
+  @apply px-6 py-4 whitespace-nowrap text-sm text-foreground border-t border-border;
+}
+
+.status-active {
+  @apply px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100;
+}
+
+.status-inactive {
+  @apply px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-100;
+}
